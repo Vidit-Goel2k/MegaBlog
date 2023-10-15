@@ -1,7 +1,8 @@
 import './App.css'
+import config from './config/config';
 
 function App() {
-  console.log(import.meta.env.VITE_APPWRITE_URL)
+  console.log( config.appwriteUrl )
   return (
     <>
       <h1>Mega blog app with appwrite</h1>
