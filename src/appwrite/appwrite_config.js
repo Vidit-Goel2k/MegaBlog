@@ -14,6 +14,8 @@ export class Service{
         this.bucket = new Storage(this.client)
     }
 
+    // post related services
+
     async createPost({title, slug, content, featuredImage, status, userId}){
         try {
             const createdPost = await this.datbases.createDocument(
@@ -91,6 +93,46 @@ export class Service{
             console.log("Appwrite service :: getPosts :: error", error)
         }
     }
+    
+    // file related services
+
+    async uploadFile(file){
+        try {
+            const uploadedFile = await this.bucket.createFile(
+                config.appwriteBucketId,
+                ID.unique(),
+                file
+            )
+            return uploadedFile
+        } catch (error) {
+            console.log("Appwrite service :: uploadFile :: error", error)
+        }
+    }
+    
+    async deleteFile(fileId){
+        try {
+            const deletedFile = await this.bucket.createFile(
+                config.appwriteBucketId,
+                fileId
+            )
+            return deletedFile
+        } catch (error) {
+            console.log("Appwrite service :: deleteFile :: error", error)
+        }
+    }
+    
+    getFilePreview(fileId){
+        try {
+            const recievedFilePreview = this.bucket.getFilePreview(
+                config.appwriteBucketId,
+                fileId
+            )
+            return recievedFilePreview
+        } catch (error) {
+            console.log("Appwrite service :: getFilePreview :: error", error)
+        }
+    }
+    
 }
 
 const service = new Service()
