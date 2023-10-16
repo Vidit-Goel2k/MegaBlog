@@ -1,7 +1,7 @@
 import config from './../config/config';
 import { Client, Account, ID } from 'appwrite';
 
-export class AuthService {
+class AuthService {
     client = new Client()
     account
 
@@ -36,6 +36,7 @@ export class AuthService {
 
     async getCurrentUser () {
         try {
+            console.log(this.account)
             return await this.account.get()
         } catch (error) {
             console.log("Appwrite service :: getcurrentUser :: error", error)
