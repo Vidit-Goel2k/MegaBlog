@@ -83,7 +83,7 @@ export class Service{
 
     async getPosts(queries = [Query.equal('status', 'active')]){
         try {
-            const recievedPosts = await this.datbases.listDocuments(
+            const recievedPosts = this.datbases.listDocuments(
                 config.appwriteDatabaseId, 
                 config.appwriteCollectionId, 
                 queries,

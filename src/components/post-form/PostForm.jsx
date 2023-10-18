@@ -17,7 +17,7 @@ const PostForm = ({post}) => {
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(state => state.auth.userData)
 
     const submit = async (data)=> {
         if(post){
@@ -36,13 +36,17 @@ const PostForm = ({post}) => {
         else{
             const file = await data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
 
+            //TODO: check fileId
             if(file){
                 const fileId = file.$id
+                console.log(fileId)
                 data.featuredImage = fileId
+                console.log(data)
                 const dbPost = await appwriteService.createPost({
                     ...data,
                     userId: userData.$id
                 })
+                console.log(dbPost)
                 if(dbPost){
                     navigate(`/post/${dbPost.$id}`)
                 }
@@ -52,14 +56,14 @@ const PostForm = ({post}) => {
  
     const slugTransform = useCallback((value) => {
         if(value && typeof value === 'string'){
-            // const slug = value.toLowerCase().replace(/ /g, '-')
-            // setValue('slug', slug)
-            // return slug
-            return value
-                .trim()
-                .toLowerCase()
-                .replace(/^[a-zA-Z\d\s]+/g, '-')
-                .replace(/\s/g, '-')
+            const slug = value.toLowerCase().replace(/ /g, '-')
+            setValue('slug', slug)
+            return slug
+            // return value
+            //     .trim()
+            //     .toLowerCase()
+            //     .replace(/^[a-zA-Z\d\s]+/g, '-')
+            //     .replace(/\s/g, '-')
         }
         
         return ''

@@ -9,8 +9,7 @@ const Protected = ({children, authentication = true}) => {
 
     const [loader, setLoader] = useState(true)
 
-    const authStatus = useSelector(state => state.auth.staus)
-
+    const authStatus = useSelector(state => state.auth.status)
     useEffect(() => {
         //TODO: make it easier to understand
 

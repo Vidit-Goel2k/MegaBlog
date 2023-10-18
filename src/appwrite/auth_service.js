@@ -3,12 +3,10 @@ import { Client, Account, ID } from 'appwrite';
 
 class AuthService {
     client = new Client()
-    account
+    account;
 
     constructor(){
-        this.client
-            .setEndpoint(config.appwriteUrl)
-            .setProject(config.appwriteProjectId)   
+        this.client.setEndpoint(config.appwriteUrl).setProject(config.appwriteProjectId)   
         this.account = new Account(this.client)
     }
 
@@ -36,7 +34,6 @@ class AuthService {
 
     async getCurrentUser () {
         try {
-            console.log(this.account)
             return await this.account.get()
         } catch (error) {
             console.log("Appwrite service :: getcurrentUser :: error", error)

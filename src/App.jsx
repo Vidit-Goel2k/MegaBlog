@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
 import './App.css'
 
@@ -13,39 +12,33 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    authService.getCurrentUser()
-    .then((userData) => {
+    authService.getCurrentUser().then((userData) => {
       if(userData){
         dispatch(login({userData}))
       }else{
         dispatch(logout())
       }
-
-      return loading ? (null) : (
-        <div></div>
-      )
-
     })
     .finally(() => setLoading(false))
   }, [])
 
-  return loading ? (null) : (
+  return !loading ? (
     <>
       <div className='flex flex-wrap content-between min-h-screen bg-gray-400 ' >
         <div className='block w-full ' >
           <Header />
           <main>
-            {/* //TODO: <Outlet /> */}
+            <Outlet />
           </main>
           <Footer />
         </div>
       </div>
     </>
-  )
+  ) : null
 }
 
 export default App
