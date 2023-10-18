@@ -22,8 +22,8 @@ const Login = () => {
         if (userData) dispatch(authLogin(userData));
         navigate("/");
       }
-    } catch (error) {
-      setError(error.message);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
