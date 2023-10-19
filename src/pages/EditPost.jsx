@@ -11,9 +11,9 @@ const EditPost = () => {
     useEffect(() => {
         if(slug){
             appwriteServices.getPost(slug).then(
-                (post) => {
-                    if(post){
-                        setPosts(post)
+                (recievedPost) => {
+                    if(recievedPost){
+                        setPosts(recievedPost)
                     }
                 }
             )
