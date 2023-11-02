@@ -1,6 +1,6 @@
 const Logo = ({width = '100px'}) => {
   return (
-    <div>Logo</div>
+    <img src="./Logo.svg" alt="Logo" width={width} />
   )
 }
 
